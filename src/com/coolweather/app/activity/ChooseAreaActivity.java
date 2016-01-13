@@ -98,7 +98,7 @@ public class ChooseAreaActivity extends Activity {
 					selectedCity = cityList.get(index);
 					queryCounties();
 				} else if (currentLevel == LEVEL_COUNTY) {
-					String countyCode = countyList.get(index).getCountyCode();
+					String countyCode = countyList.get(index).getCode();
 					Intent intent = new Intent(ChooseAreaActivity.this, WeatherActivity.class);
 					intent.putExtra("county_code", countyCode);
 					startActivity(intent);
@@ -117,7 +117,7 @@ public class ChooseAreaActivity extends Activity {
 		if (provinceList.size() > 0) {
 			dataList.clear();
 			for (Province province : provinceList) {
-				dataList.add(province.getProvinceName());
+				dataList.add(province.getName());
 			}
 			adapter.notifyDataSetChanged();
 			listView.setSelection(0);
@@ -136,14 +136,14 @@ public class ChooseAreaActivity extends Activity {
 		if (cityList.size() > 0) {
 			dataList.clear();
 			for (City city : cityList) {
-				dataList.add(city.getCityName());
+				dataList.add(city.getName());
 			}
 			adapter.notifyDataSetChanged();
 			listView.setSelection(0);
-			titleText.setText(selectedProvince.getProvinceCode());
+			titleText.setText(selectedProvince.getCode());
 			currentLevel = LEVEL_CITY;
 		} else {
-			queryFromSever(selectedProvince.getProvinceCode(), "city");
+			queryFromSever(selectedProvince.getCode(), "city");
 		}
 	}
 	
@@ -155,14 +155,14 @@ public class ChooseAreaActivity extends Activity {
 		if (countyList.size() > 0) {
 			dataList.clear();
 			for (County county : countyList) {
-				dataList.add(county.getCountyName());
+				dataList.add(county.getName());
 			}
 			adapter.notifyDataSetChanged();
 			listView.setSelection(0);
-			titleText.setText(selectedCity.getCityCode());
+			titleText.setText(selectedCity.getCode());
 			currentLevel = LEVEL_COUNTY;
 		} else {
-			queryFromSever(selectedProvince.getProvinceCode(), "county");
+			queryFromSever(selectedProvince.getCode(), "county");
 		}
 	}
 	
